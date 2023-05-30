@@ -1,10 +1,4 @@
-# Simple TS App
-**Simply create a new TS application with one command!**
-```bash
-npx simple-ts-app my-app
-```
+# Rover on mars
 
-## Includes
-- nodemon
-- typescript
-- ts-node
+## Start
+npm run start
