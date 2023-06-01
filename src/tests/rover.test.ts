@@ -1,6 +1,6 @@
-import {Planet} from "../models/Planet"
-import {Orientation} from "../enums/Orientation";
-import {Rover} from "../models/Rover";
+import {Orientation} from "../enums/Orientation"
+import {Rover} from "../models/Rover"
+import {Position} from "../models/Position"
 
 const turnLeftCases = [
   [Orientation.North, Orientation.West],
@@ -13,7 +13,7 @@ describe('rovers turn left on a planet', () => {
     test.each(turnLeftCases)(
       "turning left at %p move to %p",
       (initialOrientation, expectedOrientation) => {
-        const rover = new Rover(0, 0, initialOrientation, 10)
+        const rover = new Rover(new Position(0, 0), initialOrientation, 10)
         rover.turnLeft()
         expect(rover.orientation).toBe(expectedOrientation)
       }
@@ -31,9 +31,10 @@ describe('rovers turn right on a planet', () => {
     test.each(turnRightCases)(
       "turning right at %p move to %p",
       (initialOrientation, expectedOrientation) => {
-        const rover = new Rover(0, 0, initialOrientation, 10)
+        const rover = new Rover(new Position(0, 0), initialOrientation, 10)
         rover.turnRight()
         expect(rover.orientation).toBe(expectedOrientation)
       }
     );
 })
+
