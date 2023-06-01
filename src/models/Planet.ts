@@ -5,6 +5,7 @@ import {Position} from "./Position";
 import {Entity} from "./Entity";
 import {Floor} from "./Floor";
 import {Obstacle} from "./Obstacle";
+import {Console} from "./Console";
 
 export class Planet {
 
@@ -39,14 +40,17 @@ export class Planet {
     this._rover = new Rover(position, orientation, this)
   }
 
-  render() {
+  render(overwrite = true) {
     const renderedMap: string[][] = []
+
     this.map.forEach((row) => {
       const renderedRow: string[] = []
+
       row.forEach((entity) => {
         const position = entity.position
         renderedRow[position.x] = entity.shape(this._rover?.orientation)
       })
+
       renderedMap.push(renderedRow)
     })
 
@@ -55,7 +59,7 @@ export class Planet {
       renderedMap[roverPosition.y][roverPosition.x] = this._rover.shape(this._rover.orientation)
     }
 
-    return renderedMap.map((row) => row.join(" ")).join("\n")
+    Console.printGrid(renderedMap.map((row) => row.join(" ")).join("\n"), overwrite)
   }
 
   getEntityAtPosition(position: Position): Entity {
