@@ -8,7 +8,7 @@ import {Obstacle} from "./Obstacle";
 
 export class Planet {
 
-  private map: Entity[][] = []
+  public map: Entity[][] = []
 
   constructor(public size: number) {
     for (let y = 0; y < size; y++) {
