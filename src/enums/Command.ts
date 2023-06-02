@@ -16,7 +16,7 @@ export class Command {
     this._representation = commandName
   }
 
-  static FromInput(input: string): Command {
+  static fromInput(input: string): Command {
     switch (input) {
       case "z":
         return Command.Up

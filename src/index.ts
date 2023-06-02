@@ -1,31 +1,17 @@
-import {Planet} from "./models/Planet"
-import {planetConfig, roverConfig} from "./config"
-import {Position} from "./models/Position"
-import {Command} from "./models/Command"
-import {Console} from "./models/Console";
+import { planetConfig, roverConfig } from "./config"
+import { Position, Point } from "./models/geometry"
+import { CommandControl } from "./models/CommandControl"
+import { Rover } from "./models/entity"
+import { ToroidalPlanet } from "./models/ToroidalPlanet"
 
-const mars = new Planet(planetConfig.size)
-
-Console.Init()
-
-mars.landRover(
-  new Position(roverConfig.initialX, roverConfig.initialY),
-  roverConfig.initialOrientation
+const rover = new Rover(roverConfig.initialOrientation,
+  new Position(
+    new Point(roverConfig.initialX, roverConfig.initialY),
+    new ToroidalPlanet(planetConfig.size)
+  ),
 )
 
-process.stdout.write("use 'z', 's', 'q', 'd' keys to move the rover\n")
-process.stdout.write("use 'a' key to define travel\n")
-process.stdout.write("use ctrl + c or 'e' key to exit\n")
-mars.render(false)
+const mars = new ToroidalPlanet(planetConfig.size)
+const commandControl = new CommandControl(mars, rover)
 
-process.stdin.on('data', function (key) {
-  const keyInput = key.toString()
-
-  if(Command.FromInput(keyInput) === Command.Exit) {
-    process.exit()
-  }
-
-  mars.rover.command(keyInput)
-  mars.render()
-})
-
+commandControl.initializeControls()
