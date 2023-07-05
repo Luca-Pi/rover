@@ -1,0 +1,15 @@
+{
+  "name":"app",
+  "version":"1.0.0",
+  "workspaces":[
+    "rover",
+    "mission-control",
+    "lib"
+  ],
+  "scripts": {
+    "start:rover": "npm run dev -w rover",
+    "start:mission-control": "npm run dev -w mission-control"
+  },
+  "author":"Devayan",
+  "license":"ISC"
+}
