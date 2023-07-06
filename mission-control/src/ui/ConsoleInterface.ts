@@ -1,19 +1,21 @@
-import { UiInterface } from "./ui.interface";
-import { Command } from "../enums";
-import { ConsoleRenderer, MissionControl, PlanetMap } from "../models";
-import { sleep } from "../utils";
+import { Command } from "../enums"
+import { MissionControl, PlanetMap } from "../models"
+import { ConsoleRenderer } from "./ConsoleRenderer"
+import { sleep } from "lib"
+import { RoverState } from "../rover-connector"
 
-export class ConsoleInterface implements UiInterface {
+export class ConsoleInterface {
   constructor(
     private _missionControl: MissionControl,
     private _map: PlanetMap,
+    private _renderer: ConsoleRenderer,
   ) {
-    this.initConsole()
+    this.initMap()
     this.awaitCommand()
   }
 
-  private async initConsole() {
-    ConsoleRenderer.Init()
+  private async initMap() {
+    this._renderer.init()
     const roverState = await this._missionControl.landRover()
     this._map.discoverMap(roverState)
     this.printMap(roverState, false)
@@ -28,7 +30,7 @@ export class ConsoleInterface implements UiInterface {
       }
 
       if (command === Command.StartRecording) {
-        for (const key of ConsoleRenderer.getInstructions()) {
+        for (const key of this._renderer.getInstructions()) {
           const command = Command.fromInput(key)
 
           const roverState = await this._missionControl.sendCommand(command)
@@ -44,8 +46,8 @@ export class ConsoleInterface implements UiInterface {
     })
   }
 
-  printMap(roverState: any, overwrite: boolean = true) {
-    const grid = this._map.generateMapWithRover(roverState)
-    ConsoleRenderer.printGrid(grid, overwrite)
+  printMap(roverState: RoverState, overwrite: boolean = true) {
+    const map = this._map.generateMapWithRover(roverState)
+    this._renderer.printGrid(map, overwrite)
   }
 }

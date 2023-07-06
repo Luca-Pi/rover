@@ -1,9 +1,8 @@
-import {Position, Orientation, roverConfig } from "lib"
+import {Position, Orientation } from "lib"
 
 import { RoverState } from "../RoverState"
-import { Renderable } from "./Renderable"
 
-export class Rover implements Renderable {
+export class Rover {
   private _state: RoverState
   private _previousState: RoverState | undefined
 
@@ -61,9 +60,5 @@ export class Rover implements Renderable {
 
   goBack(): RoverState {
     return this._state = this._previousState || this._state
-  }
-
-  get shape(): string {
-    return roverConfig.render[this._state.orientation.toString()]
   }
 }

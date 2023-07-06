@@ -1,7 +1,8 @@
 import { FixedEntity, Floor, Rock } from "./entity"
-import { planetConfig, roverConfig } from "../config"
-import { Fog } from "./entity/Fog"
-import { Point, Position } from "lib"
+import { Fog } from "./entity"
+import { Point, Position, planetConfig, Orientation } from "lib"
+import { Renderable, RoverRender } from "../ui/renders"
+import { RoverState } from "../rover-connector"
 
 export class PlanetMap {
   private map: Array<FixedEntity>[] = []
@@ -36,25 +37,25 @@ export class PlanetMap {
     return this.map[position.point.y][position.point.x]
   }
 
-  generateMapWithRover(roverState: any): string {
+  generateMapWithRover(roverState: RoverState): Renderable[][] {
     return this.map.map((row, indexY) => {
       return row.map((entity, indexX) => {
         const fog = this.fogOfWar[indexY][indexX]
 
         if (indexX === roverState.position.x && indexY === roverState.position.y) {
-          return roverConfig.render[roverState.orientation]
+          return new RoverRender(Orientation.fromString(roverState.orientation))
         }
 
-        if(fog.isDiscovered) {
-          return entity.shape
+        if (fog.isDiscovered) {
+          return entity.Render
         }
 
-        return fog.shape
-      }).join("")
-    }).join("\n")
+        return fog.Render
+      })
+    })
   }
 
-  discoverMap(roverState: any) {
+  discoverMap(roverState: RoverState) {
     const fogOfWar = this.fogOfWar[roverState.position.y][roverState.position.x]
     fogOfWar.uncover()
   }

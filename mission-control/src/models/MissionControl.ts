@@ -1,9 +1,8 @@
 import { Command } from "../enums"
 import { PlanetMap } from "./PlanetMap"
 import { CollisionDetector } from "./CollisionDetector"
-import { Point, Position } from "./geometry";
-import { SystemCoordinates } from "../topology";
-import {IRoverConnector} from "./RoverConnector.interface.ts";
+import { Point, Position, SystemCoordinates } from "lib"
+import { IRoverConnector, RoverState } from "../rover-connector"
 
 export class MissionControl {
   constructor(
@@ -15,27 +14,26 @@ export class MissionControl {
 
   }
 
-  async sendCommand(command: Command): Promise<void> {
+  async sendCommand(command: Command): Promise<RoverState> {
     const roverState = await this.roverConnector.sendCommand(command)
     this.map.discoverMap(roverState)
     return await this.detectCollision(roverState)
   }
 
-  async detectCollision(roverState: any) {
-      const roverIsOnObstacle = this.collisionDetector.isEntityOnObstacle(
-        this.map,
-        new Position(
-          new Point(roverState.position.x, roverState.position.y),
-          this.planet
-        ),
-      )
+  async detectCollision(roverState: RoverState) {
+    const roverIsOnObstacle = this.collisionDetector.isEntityOnObstacle(
+      this.map,
+      new Position(
+        new Point(roverState.position.x, roverState.position.y),
+        this.planet
+      ),
+    )
 
-      if (roverIsOnObstacle) {
-        return this.roverConnector.sendCommand(Command.GoBack)
-      }
-      else {
-        return roverState
-      }
+    if (roverIsOnObstacle) {
+      return this.roverConnector.sendCommand(Command.GoBack)
+    } else {
+      return roverState
+    }
   }
 
   async landRover() {

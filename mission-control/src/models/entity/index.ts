@@ -1,5 +1,4 @@
 export { FixedEntity } from "./FixedEntity"
 export { Rock } from "./Rock"
 export { Floor } from "./Floor"
-export { Mountain } from "./Mountain"
-export { Alien } from "./Alien"
+export { Fog } from "./Fog"

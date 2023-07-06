@@ -1,15 +1,14 @@
-import {planetConfig, ToroidalPlanet} from "lib"
-import {container, Lifecycle} from "tsyringe"
+import { planetConfig, ToroidalPlanet } from "lib"
+import { container, Lifecycle } from "tsyringe"
 
-import {CollisionDetector, MissionControl, PlanetMap} from "./models"
-import {IoRoverConnector} from "./models/IoRoverConnector.ts"
-import {ConsoleInterface} from "./ui/ConsoleInterface"
-import {HTMLInterface} from "./ui/HTMLInterface.ts"
-import {AppConfig} from "./config/AppConfig.ts";
+import { CollisionDetector, MissionControl, PlanetMap } from "./models"
+import { HTMLRenderer, ConsoleRenderer, HTMLInterface, ConsoleInterface } from "./ui"
+import { IoRoverConnector } from "./rover-connector"
+import { AppConfig } from "./config"
 
 container.register(IoRoverConnector,
-  {useClass: IoRoverConnector},
-  {lifecycle: Lifecycle.Singleton}
+  { useClass: IoRoverConnector },
+  { lifecycle: Lifecycle.Singleton }
 )
 
 container.register(ToroidalPlanet, {
@@ -40,9 +39,11 @@ container.register<HTMLInterface | ConsoleInterface>("UiInterface", {
     ? new ConsoleInterface(
       container.resolve(MissionControl),
       container.resolve(PlanetMap),
+      new ConsoleRenderer()
     )
     : new HTMLInterface(
       container.resolve(MissionControl),
       container.resolve(PlanetMap),
+      new HTMLRenderer()
     )
 })

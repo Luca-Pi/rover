@@ -1,4 +1,4 @@
-import { Server } from "socket.io"
+import { Server, Socket } from "socket.io"
 import { createServer } from "http"
 import { IMissionControlConnection } from "./MissionControlConnection.interface"
 
@@ -19,7 +19,7 @@ export class IoMissionControlConnection implements IMissionControlConnection {
   }
 
   listenForCommands(onCommandCallback: (command: string, respondWith: (response :any) => void) => void) {
-    this._server.on("connection", (socket: any) => {
+    this._server.on("connection", (socket: Socket) => {
       socket.on("rover.command", onCommandCallback)
     })
   }

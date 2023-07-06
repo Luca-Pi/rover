@@ -1,22 +1,20 @@
-import { Point } from "../geometry"
-import { Renderable } from "./Renderable"
+import { Point } from "lib"
+import { Renderable } from "../../ui/renders"
 
-export class FixedEntity implements Renderable {
-  constructor(
+export abstract class FixedEntity {
+  protected constructor(
     private _point: Point,
-    private _shape: string,
     private _hasCollision: boolean = false
-  ) {}
+  ) {
+  }
 
   get point(): Point {
     return this._point
   }
 
-  get shape(): string {
-    return this._shape
-  }
-
   get hasCollision(): boolean {
     return this._hasCollision
   }
+
+  abstract get Render(): Renderable
 }

@@ -1,10 +1,11 @@
-import { planetConfig } from "../config"
+import { planetConfig } from "lib"
+import { Renderable } from "./renders"
 
 export class ConsoleRenderer {
 
-  static Init() {
+  init() {
     process.stdin.setRawMode(true)
-    process.stdin.resume();
+    process.stdin.resume()
     process.stdin.setEncoding('utf8')
 
     process.stdout.write("use 'z', 's', 'q', 'd' keys to move the rover\n")
@@ -12,26 +13,34 @@ export class ConsoleRenderer {
     process.stdout.write("use ctrl + c or 'e' key to exit\n")
   }
 
-  static clearScreen() {
+  private clearScreen() {
     process.stdout.clearScreenDown()
   }
 
-  static printGrid(grid: string, overwrite: boolean = true) {
+  getGridFromMap(map: Renderable[][]) {
+    return map.map((row) => {
+      return row.map((entity) => entity.forConsole()).join(" ")
+    }).join("\n")
+  }
+
+  printGrid(map: Renderable[][], overwrite: boolean = true) {
     if (overwrite) {
-      ConsoleRenderer.moveTo(-99, -planetConfig.size + 1)
+      this.moveTo(-99, -planetConfig.size + 1)
     }
+
+    const grid = this.getGridFromMap(map)
 
     process.stdout.write(grid)
   }
 
-  static moveTo(x: number, y: number) {
+  private moveTo(x: number, y: number) {
     process.stdout.moveCursor(x, y)
   }
 
-  static getInstructions(): string[] {
-    ConsoleRenderer.moveTo(-99, -planetConfig.size + 1)
-    ConsoleRenderer.clearScreen()
-    ConsoleRenderer.moveTo(0, planetConfig.size + 1)
+  getInstructions(): string[] {
+    this.moveTo(-99, -planetConfig.size + 1)
+    this.clearScreen()
+    this.moveTo(0, planetConfig.size + 1)
 
     // const instructions = readline.question(`Enter your instructions: (z,q,s,d)`)
 

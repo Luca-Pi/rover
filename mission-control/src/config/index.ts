@@ -1,2 +1,1 @@
-export * from "./rover"
-export * from "./planet"
+export * from "./AppConfig"
