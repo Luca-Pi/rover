@@ -1,14 +1,11 @@
 import { container, Lifecycle } from "tsyringe"
+import { Position, Point, ToroidalPlanet, roverConfig, planetConfig } from "lib"
 
-import { planetConfig, roverConfig } from "./config"
 import {
-  ToroidalPlanet,
   Rover,
   RoverControl,
-  Point,
-  Position
 } from "./models"
-import { MissionControlConnection } from "./models/MissionControlConnection";
+import { IoMissionControlConnection } from "./models/IoMissionControlConnection"
 
 container.register(Rover, {
   useValue: new Rover(
@@ -20,14 +17,14 @@ container.register(Rover, {
   )
 })
 
-container.register(MissionControlConnection,
-  { useClass: MissionControlConnection },
+container.register(IoMissionControlConnection,
+  { useClass: IoMissionControlConnection },
   { lifecycle: Lifecycle.Singleton }
 )
 
 container.register(RoverControl, {
   useValue: new RoverControl(
     container.resolve(Rover),
-    container.resolve(MissionControlConnection),
+    container.resolve(IoMissionControlConnection),
   )
 })

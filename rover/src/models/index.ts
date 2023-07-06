@@ -1,6 +1,3 @@
 export * from "./entity"
-export * from "./geometry"
-export { SystemCoordinates } from "./SystemCoordinates"
-export { ToroidalPlanet } from "./ToroidalPlanet"
 export { RoverControl } from "./RoverControl"
 export { RoverState } from "./RoverState"

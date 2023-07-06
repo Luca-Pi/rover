@@ -1,9 +1,8 @@
-import { io, Socket } from "socket.io-client"
-import { Command } from "../enums"
-import { Server } from "socket.io";
-import { createServer } from "http";
+import { Server } from "socket.io"
+import { createServer } from "http"
+import { IMissionControlConnection } from "./MissionControlConnection.interface"
 
-export class MissionControlConnection {
+export class IoMissionControlConnection implements IMissionControlConnection {
   private _server: Server
 
   constructor() {
@@ -24,13 +23,4 @@ export class MissionControlConnection {
       socket.on("rover.command", onCommandCallback)
     })
   }
-
-  // this._socket.on("rover.command", (test, _, call) => {
-  //   // call("response")
-  //   return onCommandCallback(test)
-  // })
-
-  // emitResponse(roverState: any) {
-  //   this._socket.emit("rover.response", roverState)
-  // }
 }

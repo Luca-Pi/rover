@@ -1,7 +1,7 @@
 import { FixedEntity, Floor, Rock } from "./entity"
-import { Point, Position } from "./geometry"
 import { planetConfig, roverConfig } from "../config"
-import { Fog } from "./entity/Fog";
+import { Fog } from "./entity/Fog"
+import { Point, Position } from "lib"
 
 export class PlanetMap {
   private map: Array<FixedEntity>[] = []

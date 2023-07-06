@@ -1,6 +1,5 @@
-import { Position } from "../geometry"
-import { Orientation } from "../../enums"
-import { roverConfig } from "../../config"
+import {Position, Orientation, roverConfig } from "lib"
+
 import { RoverState } from "../RoverState"
 import { Renderable } from "./Renderable"
 

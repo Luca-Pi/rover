@@ -3,14 +3,14 @@ import { PlanetMap } from "./PlanetMap"
 import { CollisionDetector } from "./CollisionDetector"
 import { Point, Position } from "./geometry";
 import { SystemCoordinates } from "../topology";
-import { RoverConnector } from "./RoverConnector.ts";
+import {IRoverConnector} from "./RoverConnector.interface.ts";
 
 export class MissionControl {
   constructor(
     private planet: SystemCoordinates,
     private collisionDetector: CollisionDetector,
     private map: PlanetMap,
-    private roverConnector: RoverConnector,
+    private roverConnector: IRoverConnector,
   ) {
 
   }

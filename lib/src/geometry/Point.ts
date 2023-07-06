@@ -1,8 +1,5 @@
 export class Point {
-  constructor(public readonly x: number, public readonly y: number) {
-    this.x = x == -0 ? 0 : x
-    this.y = y == -0 ? 0 : y
-  }
+  constructor(public readonly x: number, public readonly y: number) {}
 
   public modulo(modulo: number) {
     return new Point(this.x % modulo, this.y % modulo)

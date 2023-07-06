@@ -1,7 +1,5 @@
-import { Orientation } from "../enums"
-import { Rover } from "../models/entity"
-import { Point, Position } from "../models/geometry"
-import { ToroidalPlanet } from "../models/ToroidalPlanet"
+import { Orientation, Point, Position, ToroidalPlanet } from "lib"
+import { Rover } from "../models"
 
 const turnLeftCases = [
   [ Orientation.North, Orientation.West ],

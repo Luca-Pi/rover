@@ -1,4 +1,4 @@
-import { Orientation } from "../enums"
+import { Orientation } from "../topology"
 
 export const roverConfig = {
   initialX: 4,

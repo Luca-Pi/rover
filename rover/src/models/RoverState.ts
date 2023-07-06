@@ -1,5 +1,4 @@
-import { Orientation } from "../enums"
-import { Position } from "./geometry"
+import { Orientation, Position } from "lib"
 
 export class RoverState {
   public readonly orientation: Orientation

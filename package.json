@@ -1,15 +1,21 @@
 {
-  "name":"app",
-  "version":"1.0.0",
-  "workspaces":[
+  "name": "app",
+  "version": "1.0.0",
+  "workspaces": [
     "rover",
     "mission-control",
     "lib"
   ],
   "scripts": {
-    "start:rover": "npm run dev -w rover",
-    "start:mission-control": "npm run dev -w mission-control"
+    "postinstall": "npm run build:lib",
+    "build:lib": "npm run build -w lib",
+    "rover": "npm run dev -w rover",
+    "mission:console": "npm run start:console -w mission-control",
+    "mission:web": "npm run start:web -w mission-control"
   },
-  "author":"Devayan",
-  "license":"ISC"
+  "author": "Devayan",
+  "license": "ISC",
+  "devDependencies": {
+    "concurrently": "^8.2.0"
+  }
 }

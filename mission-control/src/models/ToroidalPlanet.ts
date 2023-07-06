@@ -1,5 +1,5 @@
 import { Point } from "./geometry"
-import { SystemCoordinates } from "../topology"
+import { SystemCoordinates } from "lib"
 
 export class ToroidalPlanet implements SystemCoordinates {
   private readonly _pointMax: Point
