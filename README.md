@@ -5,6 +5,8 @@ Ce projet contients 3 modules.
  - le rover
  - et mission control
 
+![schema architecture](/rover_mission_schema.png)
+
 # Installation
 
 à la racine de rover-mission
