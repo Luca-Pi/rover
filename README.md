@@ -13,8 +13,9 @@ Ce projet contients 3 modules.
 
 # Utilisation
 
-lancer le rover `npm run rover`
-lancer mission control: 
- - sur la console `npm run mission:console`
- - sur le web `npm run mission:web`
+Dans 2 terminaux différents:
+- lancer le rover `npm run rover`
+- lancer mission control: 
+   - sur la console `npm run mission:console`
+   - ou sur le web `npm run mission:web`
 

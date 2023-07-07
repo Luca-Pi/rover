@@ -1,21 +1,19 @@
 import { Server, Socket } from "socket.io"
 import { createServer } from "http"
-import { IMissionControlConnection } from "./MissionControlConnection.interface"
+import { IRoverEmitter } from "./RoverEmitter"
 
-export class IoMissionControlConnection implements IMissionControlConnection {
+export class SocketIoRoverEmitter implements IRoverEmitter {
   private _server: Server
 
   constructor() {
-    const httpServer = createServer({
-
-    })
+    const httpServer = createServer()
     this._server = new Server(httpServer, {
       cors: {
         origin: "*",
       }
     })
-    console.log("Mission Control Server listening on port 3000")
     httpServer.listen(3000)
+    console.log("Rover emitter listening on port 3000")
   }
 
   listenForCommands(onCommandCallback: (command: string, respondWith: (response :any) => void) => void) {

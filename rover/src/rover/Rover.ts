@@ -1,6 +1,6 @@
-import {Position, Orientation } from "lib"
+import { Position, Orientation } from "lib"
 
-import { RoverState } from "../RoverState"
+import { RoverState } from "./RoverState"
 
 export class Rover {
   private _state: RoverState
@@ -21,11 +21,11 @@ export class Rover {
       case Orientation.North:
         return this._state = this._state.WithDecrementedY()
       case Orientation.East:
-         return this._state = this._state.WithIncrementedX()
+        return this._state = this._state.WithIncrementedX()
       case Orientation.South:
-         return this._state = this._state.WithIncrementedY()
+        return this._state = this._state.WithIncrementedY()
       case Orientation.West:
-         return this._state = this._state.WithDecrementedX()
+        return this._state = this._state.WithDecrementedX()
       default:
         return this._state
     }

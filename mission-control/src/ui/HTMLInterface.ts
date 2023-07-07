@@ -1,7 +1,7 @@
 import { Command } from "../enums"
-import { MissionControl, PlanetMap } from "../models"
+import { MissionControl, PlanetMap } from "../mission-control"
 import { HTMLRenderer } from "./HTMLRenderer"
-import { RoverState } from "../rover-connector"
+import { RoverState } from "../rover-receptor"
 
 export class HTMLInterface {
   constructor(

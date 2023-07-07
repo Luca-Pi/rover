@@ -1,5 +1,5 @@
 import { Orientation, Point, Position, ToroidalPlanet } from "lib"
-import { Rover } from "../models"
+import { Rover } from "../mission-control"
 
 const turnLeftCases = [
   [ Orientation.North, Orientation.West ],

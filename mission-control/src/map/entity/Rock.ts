@@ -1,4 +1,4 @@
-import { FixedEntity } from "./FixedEntity"
+import { FixedEntity } from "./FixedEntity.ts"
 import { Renderable, RockRender } from "../../ui/renders"
 import { Point } from "lib"
 

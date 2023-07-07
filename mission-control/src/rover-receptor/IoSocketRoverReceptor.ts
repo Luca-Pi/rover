@@ -1,9 +1,9 @@
 import { io, Socket } from "socket.io-client"
 import { Command } from "../enums"
-import { IRoverConnector } from "./RoverConnector.interface.ts"
+import { IRoverReceptor } from "./RoverReceptor.interface.ts"
 import { RoverState } from "./RoverState.ts"
 
-export class IoRoverConnector implements IRoverConnector {
+export class IoSocketRoverReceptor implements IRoverReceptor {
   _socket: Socket
 
   constructor() {

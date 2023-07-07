@@ -1,17 +1,16 @@
 import { Command } from "../enums"
-import { PlanetMap } from "./PlanetMap"
-import { CollisionDetector } from "./CollisionDetector"
 import { Point, Position, SystemCoordinates } from "lib"
-import { IRoverConnector, RoverState } from "../rover-connector"
+import { IRoverReceptor, RoverState } from "../rover-receptor"
+import { PlanetMap } from "../map"
+import { CollisionDetector } from "./CollisionDetector"
 
 export class MissionControl {
   constructor(
     private planet: SystemCoordinates,
     private collisionDetector: CollisionDetector,
     private map: PlanetMap,
-    private roverConnector: IRoverConnector,
+    private roverConnector: IRoverReceptor,
   ) {
-
   }
 
   async sendCommand(command: Command): Promise<RoverState> {

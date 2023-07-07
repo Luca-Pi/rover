@@ -1,8 +1,7 @@
-import { FixedEntity, Floor, Rock } from "./entity"
-import { Fog } from "./entity"
 import { Point, Position, planetConfig, Orientation } from "lib"
+import { FixedEntity, Floor, Rock, Fog } from "./entity"
 import { Renderable, RoverRender } from "../ui/renders"
-import { RoverState } from "../rover-connector"
+import { RoverState } from "../rover-receptor"
 
 export class PlanetMap {
   private map: Array<FixedEntity>[] = []

@@ -1,13 +1,14 @@
 import { planetConfig, ToroidalPlanet } from "lib"
 import { container, Lifecycle } from "tsyringe"
 
-import { CollisionDetector, MissionControl, PlanetMap } from "./models"
+import { CollisionDetector, MissionControl } from "./mission-control"
 import { HTMLRenderer, ConsoleRenderer, HTMLInterface, ConsoleInterface } from "./ui"
-import { IoRoverConnector } from "./rover-connector"
+import { IoSocketRoverReceptor } from "./rover-receptor"
 import { AppConfig } from "./config"
+import { PlanetMap } from "./map"
 
-container.register(IoRoverConnector,
-  { useClass: IoRoverConnector },
+container.register(IoSocketRoverReceptor,
+  { useClass: IoSocketRoverReceptor },
   { lifecycle: Lifecycle.Singleton }
 )
 
@@ -30,7 +31,7 @@ container.register(MissionControl, {
     container.resolve(ToroidalPlanet),
     container.resolve(CollisionDetector),
     container.resolve(PlanetMap),
-    container.resolve(IoRoverConnector)
+    container.resolve(IoSocketRoverReceptor)
   )
 })
 

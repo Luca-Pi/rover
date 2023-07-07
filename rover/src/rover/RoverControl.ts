@@ -1,12 +1,12 @@
 import { Command } from "../enums"
-import { Rover } from "./entity"
+import { Rover } from "./Rover"
 import { RoverState } from "./RoverState"
-import { IMissionControlConnection } from "./MissionControlConnection.interface"
+import { IRoverEmitter } from "../rover-emmiter"
 
 export class RoverControl {
   constructor(
     private rover: Rover,
-    private missionControlConnection: IMissionControlConnection
+    private missionControlConnection: IRoverEmitter
 ) {}
 
   executeCommand(command: string): RoverState | undefined {

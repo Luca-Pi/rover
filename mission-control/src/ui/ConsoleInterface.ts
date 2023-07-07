@@ -1,8 +1,8 @@
 import { Command } from "../enums"
-import { MissionControl, PlanetMap } from "../models"
+import { MissionControl, PlanetMap } from "../mission-control"
 import { ConsoleRenderer } from "./ConsoleRenderer"
 import { sleep } from "lib"
-import { RoverState } from "../rover-connector"
+import { RoverState } from "../rover-receptor"
 
 export class ConsoleInterface {
   constructor(

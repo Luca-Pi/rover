@@ -1,4 +1,4 @@
-export interface IMissionControlConnection {
+export interface IRoverEmitter {
   listenForCommands(
       onCommandCallback: (
           command: string,
