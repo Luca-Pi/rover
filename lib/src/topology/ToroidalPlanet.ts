@@ -1,7 +1,7 @@
 import { Point } from "../geometry"
-import { SystemCoordinates } from "./SystemCoordinates"
+import { Planet } from "./Planet"
 
-export class ToroidalPlanet implements SystemCoordinates {
+export class ToroidalPlanet implements Planet {
   private readonly _pointMax: Point
 
   constructor(readonly size: number) {

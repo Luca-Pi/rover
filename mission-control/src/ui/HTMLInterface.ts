@@ -1,7 +1,9 @@
 import { Command } from "../enums"
-import { MissionControl, PlanetMap } from "../mission-control"
+import { MissionControl } from "../mission-control"
 import { HTMLRenderer } from "./HTMLRenderer"
 import { RoverState } from "../rover-receptor"
+import { Point } from "lib"
+import { PlanetMap } from "../map"
 
 export class HTMLInterface {
   constructor(
@@ -9,14 +11,14 @@ export class HTMLInterface {
     private _map: PlanetMap,
     private _renderer: HTMLRenderer
   ) {
-    this.initMap()
+    this.initInterface()
     this.awaitCommand()
   }
 
-  private async initMap() {
+  private async initInterface() {
     this._renderer.initMap(this._map.size)
     const roverState = await this._missionControl.landRover()
-    this._map.discoverMap(roverState)
+    this._map.discoverMapOnPosition(new Point(roverState.position.x, roverState.position.y))
     this.printMap(roverState)
   }
 
@@ -31,7 +33,6 @@ export class HTMLInterface {
 
   printMap(roverState: RoverState) {
     const map = this._map.generateMapWithRover(roverState)
-
     this._renderer.printGrid(this._renderer.getGridFromMap(map))
   }
 }

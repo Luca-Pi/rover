@@ -1,5 +1,5 @@
 import { Point } from "../geometry"
 
-export interface SystemCoordinates {
+export interface Planet {
   standardize(position: Point): Point
 }

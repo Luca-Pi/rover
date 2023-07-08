@@ -15,7 +15,7 @@ export class MissionControl {
 
   async sendCommand(command: Command): Promise<RoverState> {
     const roverState = await this.roverConnector.sendCommand(command)
-    this.map.discoverMap(roverState)
+    this.map.discoverMapOnPosition(new Point(roverState.position.x, roverState.position.y))
     return await this.detectCollision(roverState)
   }
 
@@ -30,9 +30,9 @@ export class MissionControl {
 
     if (roverIsOnObstacle) {
       return this.roverConnector.sendCommand(Command.GoBack)
-    } else {
-      return roverState
     }
+
+    return roverState
   }
 
   async landRover() {

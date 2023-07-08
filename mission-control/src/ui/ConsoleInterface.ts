@@ -1,8 +1,9 @@
 import { Command } from "../enums"
-import { MissionControl, PlanetMap } from "../mission-control"
+import { MissionControl } from "../mission-control"
 import { ConsoleRenderer } from "./ConsoleRenderer"
-import { sleep } from "lib"
+import { Point, sleep } from "lib"
 import { RoverState } from "../rover-receptor"
+import { PlanetMap } from "../map"
 
 export class ConsoleInterface {
   constructor(
@@ -10,14 +11,14 @@ export class ConsoleInterface {
     private _map: PlanetMap,
     private _renderer: ConsoleRenderer,
   ) {
-    this.initMap()
+    this.initInterface()
     this.awaitCommand()
   }
 
-  private async initMap() {
+  private async initInterface() {
     this._renderer.init()
     const roverState = await this._missionControl.landRover()
-    this._map.discoverMap(roverState)
+    this._map.discoverMapOnPosition(new Point(roverState.position.x, roverState.position.y))
     this.printMap(roverState, false)
   }
 

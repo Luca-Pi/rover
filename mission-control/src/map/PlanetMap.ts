@@ -1,19 +1,19 @@
-import { Point, Position, planetConfig, Orientation } from "lib"
+import { Point, Position, Orientation } from "lib"
 import { FixedEntity, Floor, Rock, Fog } from "./entity"
-import { Renderable, RoverRender } from "../ui/renders"
 import { RoverState } from "../rover-receptor"
+import { Renderable, RoverRender } from "../ui/renders"
 
 export class PlanetMap {
   private map: Array<FixedEntity>[] = []
   private fogOfWar: Array<Fog>[] = []
 
-  constructor(public size: number) {
+  constructor(public size: number, obstacles: Point[] = []) {
     for (let y = 0; y < this.size; y++) {
       const row: FixedEntity[] = []
       const fogRow: Fog[] = []
 
       for (let x = 0; x < this.size; x++) {
-        row.push(this.generateEntityOnPoint(new Point(x, y)))
+        row.push(this.generateEntityOnPoint(new Point(x, y), obstacles))
         fogRow.push(new Fog(new Point(x, y)))
       }
 
@@ -22,11 +22,13 @@ export class PlanetMap {
     }
   }
 
-  private generateEntityOnPoint(point: Point): FixedEntity {
+  private generateEntityOnPoint(point: Point, obstacles: Point[]): FixedEntity {
     let entity: FixedEntity = new Floor(point)
 
-    if (Math.random() < planetConfig.rockDensity) {
-      entity = new Rock(point)
+    for(let obstacle of obstacles) {
+      if (obstacle.x === point.x && obstacle.y === point.y) {
+        entity = new Rock(point)
+      }
     }
 
     return entity
@@ -54,8 +56,8 @@ export class PlanetMap {
     })
   }
 
-  discoverMap(roverState: RoverState) {
-    const fogOfWar = this.fogOfWar[roverState.position.y][roverState.position.x]
+  discoverMapOnPosition(position: Point) {
+    const fogOfWar = this.fogOfWar[position.y][position.x]
     fogOfWar.uncover()
   }
 }

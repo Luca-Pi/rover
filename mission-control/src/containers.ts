@@ -5,7 +5,7 @@ import { CollisionDetector, MissionControl } from "./mission-control"
 import { HTMLRenderer, ConsoleRenderer, HTMLInterface, ConsoleInterface } from "./ui"
 import { IoSocketRoverReceptor } from "./rover-receptor"
 import { AppConfig } from "./config"
-import { PlanetMap } from "./map"
+import { PlanetMap, PlanetMapBuilder } from "./map"
 
 container.register(IoSocketRoverReceptor,
   { useClass: IoSocketRoverReceptor },
@@ -17,9 +17,7 @@ container.register(ToroidalPlanet, {
 })
 
 container.register(PlanetMap, {
-  useValue: new PlanetMap(
-    container.resolve(ToroidalPlanet).size,
-  )
+  useValue: new PlanetMapBuilder().WithSize(planetConfig.size).WithRandomObstacles().Build()
 })
 
 container.register(CollisionDetector, {

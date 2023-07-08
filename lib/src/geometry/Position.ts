@@ -1,8 +1,8 @@
 import { Point } from "./Point"
-import { SystemCoordinates } from "../topology"
+import { Planet } from "../topology"
 
 export class Position {
-  constructor(private readonly _point: Point, private _systemCoordinates: SystemCoordinates) {
+  constructor(private readonly _point: Point, private _systemCoordinates: Planet) {
     this._point = _systemCoordinates.standardize(_point)
   }
 
