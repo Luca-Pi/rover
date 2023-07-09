@@ -31,7 +31,7 @@ export class ConsoleInterface {
       }
 
       if (command === Command.StartRecording) {
-        for (const key of this._renderer.getInstructions()) {
+        for (const key of await this._renderer.getInstructions()) {
           const command = Command.fromInput(key)
 
           const roverState = await this._missionControl.sendCommand(command)

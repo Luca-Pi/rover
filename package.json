@@ -10,6 +10,9 @@
     "postinstall": "npm run build:lib",
     "build:lib": "npm run build -w lib",
     "rover": "npm run dev -w rover",
+    "test": "npm run test:rover && npm run test:mission",
+    "test:rover": "npm run test -w rover",
+    "test:mission": "npm run test -w mission-control",
     "mission:console": "npm run start:console -w mission-control",
     "mission:web": "npm run start:web -w mission-control"
   },

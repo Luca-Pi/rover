@@ -21,3 +21,8 @@ Dans 2 terminaux différents:
    - sur la console `npm run mission:console`
    - ou sur le web `npm run mission:web`
 
+# Tests
+
+Pour lancer tous les tests: `npm run test`
+Pour lancer les tests d'un module: `npm run test:rover` ou `npm run test:mission`
+

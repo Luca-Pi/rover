@@ -38,6 +38,29 @@ export class Command {
     }
   }
 
+  static fromString(commandName: string): Command {
+    switch (commandName) {
+      case "Up":
+        return Command.Up
+      case "Down":
+        return Command.Down
+      case "Right":
+        return Command.Right
+      case "Left":
+        return Command.Left
+      case "GoBack":
+        return Command.GoBack
+      case "Land":
+        return Command.Land
+      case "StartRecording":
+        return Command.StartRecording
+      case "Exit":
+        return Command.Exit
+      default:
+        return Command.Invalid
+    }
+  }
+
   toString(): string {
     return this._representation
   }

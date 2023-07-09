@@ -1,5 +1,6 @@
 import { planetConfig } from "lib"
 import { Renderable } from "./renders"
+import * as readline from "readline"
 
 export class ConsoleRenderer {
 
@@ -37,15 +38,26 @@ export class ConsoleRenderer {
     process.stdout.moveCursor(x, y)
   }
 
-  getInstructions(): string[] {
+  async getInstructions(): Promise<string[]> {
     this.moveTo(-99, -planetConfig.size + 1)
     this.clearScreen()
     this.moveTo(0, planetConfig.size + 1)
 
-    // const instructions = readline.question(`Enter your instructions: (z,q,s,d)`)
+    const instructions = await this.askQuestion(`Enter your instructions: (z,q,s,d)`)
 
     process.stdout.clearLine(0)
-    // return instructions.split("")
-    return []
+    return instructions.split("")
+  }
+
+  private askQuestion(query: string): Promise<string> {
+    const rl = readline.createInterface({
+      input: process.stdin,
+      output: process.stdout,
+    });
+
+    return new Promise(resolve => rl.question(query, answer => {
+      rl.close()
+      resolve(answer)
+    }))
   }
 }

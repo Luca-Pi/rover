@@ -1,12 +1,12 @@
 import { Command } from "../enums"
-import { Point, Position, SystemCoordinates } from "lib"
+import { Point, Position, Planet } from "lib"
 import { IRoverReceptor, RoverState } from "../rover-receptor"
 import { PlanetMap } from "../map"
 import { CollisionDetector } from "./CollisionDetector"
 
 export class MissionControl {
   constructor(
-    private planet: SystemCoordinates,
+    private planet: Planet,
     private collisionDetector: CollisionDetector,
     private map: PlanetMap,
     private roverConnector: IRoverReceptor,
